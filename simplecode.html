@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Line Simulation</title>
+    <style>
+        #terminal {
+            margin: 0 auto;
+        }
+        #log {
+            white-space: pre-wrap;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        .line {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        .line span {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        .input-line {
+            display: flex;
+            align-items: center;
+        }
+        .input-line input {
+            border: none;
+            width: 100%;
+            outline: none;
+            font-size: 19px;
+        }
+    </style>
+</head>
+<body>
+    <div id="terminal">
+        <div id="log"></div>
+        <div class="input-line">
+            <span>Command></span>
+            <input type="text" id="commandInput" autofocus>
+        </div>
+    </div>
+
+    <script>
+        const terminalLog = document.getElementById('log');
+        const commandInput = document.getElementById('commandInput');
+        
+        commandInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const command = commandInput.value.trim();
+                if (command) {
+                    // Display the command in the terminal log
+                    const commandLine = document.createElement('div');
+                    commandLine.classList.add('line');
+                    commandLine.innerHTML = `<span>Command></span><span>${command}</span>`;
+                    terminalLog.appendChild(commandLine);
+
+                    // Simulate command execution logs
+                    const resultLine = document.createElement('div');
+                    resultLine.classList.add('line');
+                    resultLine.innerHTML = `<span>Logs: Executing ${command}...</span>`;
+                    terminalLog.appendChild(resultLine);
+
+                    // Simulate a delay for execution result
+                    setTimeout(() => {
+                        const completionLog = document.createElement('div');
+                        completionLog.classList.add('line');
+                        completionLog.innerHTML = `<span>${command} completed successfully!</span>`;
+                        terminalLog.appendChild(completionLog);
+                        
+                        // Scroll to the bottom after adding new content
+                        terminalLog.scrollTop = terminalLog.scrollHeight;
+
+                        // Add a new input line for the next command
+                    }, 1000);
+                    
+                    createNewCommandLine();
+                    // Clear input field
+                    commandInput.value = '';
+                }
+            }
+        });
+
+        function createNewCommandLine() {
+            const newCommandLine = document.createElement('div');
+            newCommandLine.classList.add('input-line');
+            newCommandLine.innerHTML = '<span>Command ></span><input type="text" autofocus>';
+
+            terminalLog.appendChild(newCommandLine);
+
+            // Remove the current input line
+            document.querySelector('.input-line').remove();
+
+            // Set focus on the new input field
+            const newInput = newCommandLine.querySelector('input');
+            newInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    const command = newInput.value.trim();
+                    if (command) {
+                        // Add the command and logs
+                        const commandLine = document.createElement('div');
+                        commandLine.classList.add('line');
+                        commandLine.innerHTML = `<span>Command ></span><span>${command}</span>`;
+                        terminalLog.appendChild(commandLine);
+
+                        const resultLine = document.createElement('div');
+                        resultLine.classList.add('line');
+                        resultLine.innerHTML = `<span>Logs: Executing ${command}...</span>`;
+                        terminalLog.appendChild(resultLine);
+
+                        setTimeout(() => {
+                            const completionLog = document.createElement('div');
+                            completionLog.classList.add('line');
+                            completionLog.innerHTML = `<span>${command} completed successfully!</span>`;
+                            terminalLog.appendChild(completionLog);
+
+                            terminalLog.scrollTop = terminalLog.scrollHeight;
+
+                            createNewCommandLine();
+                        }, 1000);
+
+                        // Clear the input field
+                        newInput.value = '';
+                    }
+                }
+            });
+            newInput.focus();
+        }
+    </script>
+</body>
+</html>

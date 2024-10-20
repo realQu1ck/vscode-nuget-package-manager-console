@@ -9,13 +9,34 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "extensionKind": [
+		"ui",
+		"workspace"
+	],
   "main": "./out/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "panel": [
+        {
+          "id": "nugetPackageManagerConsole",
+          "title": "Package Manager Console",
+          "icon": "resources/images/NuGet_project_logo.png"
+        }
+      ]
+    },
+    "views": {
+      "nugetPackageManagerConsole": [
+        {
+          "type": "webview",
+          "id": "nugetConsoleView",
+          "name": "Nuget Console"
+        }
+      ]
+    },
     "commands": [
       {
-        "command": "vscode-nuget-package-manager-console.helloWorld",
-        "title": "Hello World"
+        "command": "vscode-nuget-package-manager-console.activateNugetConsole",
+        "title": "Activate Nuget Package Manager Console"
       }
     ]
   },

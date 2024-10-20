@@ -1,3 +1,7 @@
+# Simple Nuget Package Manager Console For Visual Studio Code
+
+Developing ...
+
 # vscode-nuget-package-manager-console README
 
 This is the README for your extension "vscode-nuget-package-manager-console". After writing up a brief description, we recommend including the following sections.

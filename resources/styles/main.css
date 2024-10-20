@@ -1,0 +1,33 @@
+#terminal {
+    margin: 0 auto;
+}
+#log {
+    white-space: pre-wrap;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+.line {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+.line span {
+    margin-right: 10px;
+}
+.input-line {
+    display: flex;
+    align-items: center;
+}
+.input-line input {
+    border: none;
+    width: 100%;
+    outline: none;
+    font-size: 15px;
+    margin-left: 4px;
+    background-color: transparent;
+    color: white;
+}
+
+#projectSelect{
+    margin-bottom: 10px;
+}
